@@ -38,6 +38,8 @@ const clientSessions = {}
 app.set('trust proxy', 1) // trust first proxy
 sharedSession = require("cookie-session")({
     name: 'session',
+    secure: true,
+    sameSite:"none",
     keys: [process.env.COOKIE_KEY],
       maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }),
