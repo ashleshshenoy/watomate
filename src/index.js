@@ -42,8 +42,10 @@ sharedSession = require("cookie-session")({
       maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }),
  
+
 app.use(sharedSession);
 app.use(express.json());
+app.get('/healthcheck', (req, res) => res.send('Hello World!'))
 app.use('/auth', authRouter)
 app.use('/gpt',isAuthenticated, sessionStore(clientSessions), gptRouter);
 app.use('/campaign',isAuthenticated,sessionStore(clientSessions), campaignRouter);
@@ -109,7 +111,7 @@ io.on('connection', (socket) => {
 
 async function startServer(){
     await db.query("DELETE FROM poll")
-    server.listen(5000, () => {
+    server.listen(process.env.PORT, () => {
         console.log('listening on *:5000');
     });
 }
