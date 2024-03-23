@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 var cors = require('cors')
 app.use(cors({ 
-    origin: ['https://master.d2lfwp4c45elp5.amplifyapp.com','https://wato-mate.in'], 
+    origin: ['https://master.d2lfwp4c45elp5.amplifyapp.com','https://www.wato-mate.in', "https://wato-mate.in"], 
     methods: ['GET', 'POST', 'DELETE'], 
     credentials: true,
 }))
@@ -16,7 +16,7 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server,{
     cors:{  
-        origin : ['https://master.d2lfwp4c45elp5.amplifyapp.com', 'https://wato-mate.in'],
+        origin: ['https://master.d2lfwp4c45elp5.amplifyapp.com','https://www.wato-mate.in', "https://wato-mate.in"], 
         methods: ['GET', 'POST'],
         credentials: true,
     }
