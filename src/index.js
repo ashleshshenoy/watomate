@@ -2,11 +2,9 @@ const express = require("express");
 const app = express();
 var cors = require('cors')
 app.use(cors({ 
-    preflightContinue: true,
-    origin: ['https://master.d2lfwp4c45elp5.amplifyapp.com', 'https://wato-mate.com'], 
-    methods: ['GET', 'POST', 'PUT', 'PATCH' , 'DELETE', 'OPTIONS'],
+    origin: ['https://master.d2lfwp4c45elp5.amplifyapp.com','https://wato-mate.com'], 
+    methods: ['GET', 'POST', 'DELETE'], 
     credentials: true,
-    
 }))
 const path = require('path')
 require('dotenv').config({path: path.join(__dirname, '..','.env')})
@@ -18,9 +16,8 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server,{
     cors:{  
-        preflightContinue: true,
         origin : ['https://master.d2lfwp4c45elp5.amplifyapp.com', 'https://wato-mate.com'],
-        methods: ['GET', 'POST', 'PUT', 'PATCH' , 'DELETE', 'OPTIONS'],
+        methods: ['GET', 'POST'],
         credentials: true,
     }
 }); 
@@ -102,7 +99,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on("session", ()=>{
-        if(!socket.request.session || !socket.request.session.user){
+        if(socket.request.session && socket.request.session.user){
             let id = socket.request.session.user;
             email = id.replace(/[.@-]/g, '');
             createSession(email, socket);
