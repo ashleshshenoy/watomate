@@ -62,7 +62,6 @@ const createSession = (id, socket)=>{
         puppeteer:{
             args:[
                 '--no-sandbox',
-                '--disable-setuid-sandbox'      
             ],
             headless: true,
         },
