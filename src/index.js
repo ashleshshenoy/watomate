@@ -2,9 +2,11 @@ const express = require("express");
 const app = express();
 var cors = require('cors')
 app.use(cors({ 
+    preflightContinue: true,
     origin: ['https://master.d2lfwp4c45elp5.amplifyapp.com', 'https://wato-mate.com'], 
-    methods: ['GET', 'POST', 'DELETE'], 
+    methods: ['GET', 'POST', 'PUT', 'PATCH' , 'DELETE', 'OPTIONS'],
     credentials: true,
+    
 }))
 const path = require('path')
 require('dotenv').config({path: path.join(__dirname, '..','.env')})
@@ -16,8 +18,9 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server,{
     cors:{  
+        preflightContinue: true,
         origin : ['https://master.d2lfwp4c45elp5.amplifyapp.com', 'https://wato-mate.com'],
-        methods: ['GET', 'POST'],
+        methods: ['GET', 'POST', 'PUT', 'PATCH' , 'DELETE', 'OPTIONS'],
         credentials: true,
     }
 }); 
