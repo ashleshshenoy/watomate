@@ -60,6 +60,10 @@ const createSession = (id, socket)=>{
     console.log("creating session")
     const client = new Client({
         puppeteer:{
+            args:[
+                '--no-sandbox',
+                '--disable-setuid-sandbox'      
+            ],
             headless: true,
         },
         authStrategy : new LocalAuth({
